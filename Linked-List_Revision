@@ -1,0 +1,152 @@
+#include<iostream>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+    Node* prev;
+Node(){
+    int data=0;
+    Node* next=NULL;
+    Node* prev=NULL;
+    // Node* head=NULL;
+    // Node* tail=NULL;
+}
+Node(int data){
+this->data=data;
+this->next=NULL;
+this->prev=NULL;
+// this->head=NULL;
+// this->tail=NULL;
+}
+};
+int getLength(Node* head){
+    int len=0;
+    Node* temp=head;
+while(temp!=NULL){
+  temp=temp->next;
+  len++;
+}return len;
+}
+
+// void insertHead(Node* &o, int data){
+//     Node* newNode=new Node(500);
+//     newNode->next=o;
+//     o=newNode;
+// }
+// void insertTail(Node* &t, int data){
+//     Node* newNode=new Node(500);
+//     t->next=newNode;
+//     t=newNode;
+// }
+// void insertPosition(Node* &o,Node* &t,int pos,int data){
+//     int len =getLength(o);
+//     if(o==NULL){
+//         Node* newNode=new Node(data);
+//         o=newNode;
+//         t=newNode;
+//         return;
+//     }
+//     if(pos==0){
+//         insertHead(o,500);
+//         return;
+//     }
+//     if(pos>=len){
+//      insertTail(t,data);
+// return;
+//     }
+//     int i=1;
+//     Node* prev=o;
+//     while(i<pos-1){
+//         prev=prev->next;
+//         i++;
+//     }
+//     Node* curr=prev->next;
+//      Node* newNode=new Node(data);
+//      newNode->next=curr;
+//      prev->next=newNode;
+// }
+// void print(Node* &o){
+//     Node* temp=o;
+//     while(temp!=NULL){
+//         cout<<temp->data<<" ";
+//         temp=temp->next;
+//     }
+// }
+
+//Doubly Linked-list
+
+void insertHead(Node* &o, int data){
+    Node* newNode=new Node(500);
+    newNode->next=o;
+    o->prev=newNode;
+    o=newNode;
+}
+void insertTail(Node* &t, int data){
+    Node* newNode=new Node(500);
+    t->next=newNode;
+    newNode->prev=t;
+    t=newNode;
+}
+void insertPosition(Node* &o,Node* &t,int pos,int data){
+    int len =getLength(o);
+    if(o==NULL){
+        Node* newNode=new Node(data);
+        o=newNode;
+        t=newNode;
+        return;
+    }
+    if(pos==0){
+        insertHead(o,500);
+        return;
+    }
+    if(pos>=len){
+     insertTail(t,data);
+return;
+    }
+    int i=1;
+    Node* p=o;
+    while(i<pos-1){
+        p=p->next;
+        i++;
+    }
+    Node* curr=p->next;
+     Node* newNode=new Node(data);
+    
+     p->next=newNode;
+     newNode->prev=p;
+     curr->prev=newNode;
+     newNode->next=curr;
+
+}
+void print(Node* &o){
+    Node* temp=o;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+}
+
+int main(){
+Node* head=new Node(10);
+Node* first=new Node(20);
+Node* second=new Node(30);
+head->next=first;
+first->next=second;
+Node* o=NULL;
+Node* t=NULL;
+// insertHead(o,40);
+// insertHead(o,50);
+// insertHead(o,60);
+// insertHead(o,70);
+// insertHead(o,80);
+// insertTail(t,90);
+    // insertHead(o,500);
+    // insertTail(t,o,500);
+  insertPosition(o,t,3,500);
+cout<<getLength(o)<<endl;
+    print(o);
+//     cout<<o->data<<" ";
+//     cout<<t->data<<" ";
+cout<<endl<<getLength(head);
+}
